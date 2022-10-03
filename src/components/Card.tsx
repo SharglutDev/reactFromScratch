@@ -1,6 +1,11 @@
 import React from "react";
+import { Country } from "./interfaces";
 
-const Card: any = ({ country }: { country: any }) => {
+export interface ICardProps {
+  country: Country;
+}
+
+const Card = ({ country }: ICardProps) => {
   return (
     <li className="card">
       <img

@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import { Country } from "./interfaces";
 
 const Countries = () => {
-  const [data, setData] = useState<any>([]);
-  const [rangeValue, setRangeValue] = useState<any>(36);
+  const [data, setData] = useState<Country[]>([]);
+  const [rangeValue, setRangeValue] = useState<string>("36");
   const [selectedRadio, setSelectedRadio] = useState<string>("");
   const radios: string[] = [
     "Africa",
@@ -57,17 +58,17 @@ const Countries = () => {
       )}
       <ul>
         {data
-          .filter((filteredCountry: any) =>
+          .filter((filteredCountry: Country) =>
             selectedRadio
               ? filteredCountry.continents[0] === selectedRadio
               : filteredCountry
           )
           .sort(
-            (country1: any, country2: any) =>
-              country2.population - country1.population
+            (country1: Country, country2: Country) =>
+              parseInt(country2.population) - parseInt(country1.population)
           )
-          .slice(0, rangeValue)
-          .map((country: any, index: any) => {
+          .slice(0, parseInt(rangeValue))
+          .map((country: Country, index: number) => {
             return <Card key={index} country={country} />;
           })}
       </ul>
